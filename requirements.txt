@@ -1,0 +1,23 @@
+torch==2.2.0 --index-url https://download.pytorch.org/whl/cpu
+dgl -f https://data.dgl.ai/wheels/repo.html dglgo -f https://data.dgl.ai/wheels-test/repo.html
+numpy<=1.23
+pandas
+scipy
+pyyaml
+pydantic
+torchdata
+rdkit==2023.9.1
+matplotlib==3.8.2
+wandb==0.16.1
+lightning==2.1.2
+networkx==3.2.1
+seaborn
+ipython
+jupyter
+tensorflow==2.10
+-e ./deps/kimmdy[reactions,analysis]
+-e ./deps/grappa
+-e ./deps/HAT_reaction_plugin
+-e ./deps/kimmdy-grappa
+-e ./deps/kimmdy-hydrolysis-naive/
+

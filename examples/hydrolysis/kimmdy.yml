@@ -1,0 +1,28 @@
+name: 'ala_custom'
+max_tasks: 100
+gromacs_alias: 'gmx'
+gmx_mdrun_flags: -maxh 24 -dlb yes -nt 8 -npme 0 -ntmpi 1
+topology:
+  reactive:
+    include: "SOL"
+top: 'hexala.top'
+gro: 'npt.gro'
+ndx: 'index.ndx'
+mds:
+  equilibrium:
+    mdp: 'md.mdp'
+  relax:
+    mdp: 'md_slow_growth.mdp'
+changer:
+  coordinates:
+    md: 'relax'  
+    slow_growth: True
+  topology:
+    parameterization: 'basic'
+reactions:
+  hydrolysis_naive:
+    kmc: rfkmc
+sequence:
+  - equilibrium
+  - reactions
+  - equilibrium

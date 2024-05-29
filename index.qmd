@@ -1,0 +1,262 @@
+---
+title: |
+  KIMMDY: Reactive Molecular Dynamics Framework using Kinetic Monte Carlo
+subtitle: Designing Software for Humans
+date: today
+date-format: long
+author: Jannik Buhr, MBM
+institute: Heidelberg Institute for Theoretical Studies
+format:
+  hits-revealjs:
+    width: 1920
+    height: 1080
+    title-slide-attributes:
+      data-background-image: ./www/helix-wide.png
+      data-background-color: white
+      data-background-size: contain
+      data-background-position: center bottom -10%
+    citations-hover: true
+    reference-links: false
+    preview-links: false
+    progress: true
+    slide-number: true
+    chalkboard:
+      buttons: true
+      src: ./www/chalkboard.json
+    multiplex: false
+    css: ./www/styles.css
+    footer: |
+      <https://github.com/hits-mbm-dev/2024-hits-kimmdy>
+footnotes-hover: true
+reference-location: document
+favicon: ./www/hits-logo.png
+bibliography: ./references.bib
+mermaid-format: png
+nocite:
+  - "@quarto"
+engine: jupyter
+self-contained: false
+execute:
+  eval: true
+  echo: false
+  warning: false
+  cache: false
+---
+
+# Intro
+
+```{python}
+import numpy as np
+from numpy import pi
+import matplotlib.pyplot as plt
+
+plt.rcParams['figure.dpi'] = 100
+```
+
+## Simulating Molecular Systems
+
+## Molecular Dynamics / Molecular Mechanics
+
+{{< mol-url ./examples/alanine_hat/just-ala.gro >}}
+
+## Force Fields
+
+### Bonds, Angles, Dihedrals
+
+
+
+
+
+::::box
+:::b
+:::{#morse}
+$$V_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2$$
+:::
+```{python}
+x = np.linspace(0.1, 10, 100)
+d = 1
+b = 0.9
+y = d * (1 - np.exp(-b * (x - 1)))**2
+
+plt.subplots(figsize=(3,2))
+plt.axis('off')
+plt.plot(x, y, color='black', linewidth=5)
+plt.show()
+```
+:::
+
+:::b
+:::{#harmonic}
+$$V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2$$
+:::
+```{python}
+x = np.linspace(-2, 2, 100)
+k = 0.1
+y = 0.5 * k * x**2
+
+plt.subplots(figsize=(2,2))
+plt.axis('off')
+plt.plot(x, y, color='black', linewidth=5)
+plt.show()
+```
+:::
+
+:::b
+:::{#dihedral}
+$$V(\phi) = k_\phi (1 + \cos(n \phi - \delta))$$
+:::
+```{python}
+x = np.linspace(-pi, pi, 100)
+y = 1 + np.cos(2 * x - 0.5)
+
+plt.subplots(figsize=(5,3))
+plt.axis('off')
+plt.plot(x, y, color='black', linewidth=5)
+plt.show()
+```
+:::
+::::
+
+## But what about Chemistry?
+
+## Monte Carlo is just rolling dice
+
+
+```{python}
+fig, ax = plt.subplots(figsize=(1,5))
+plt.axis('off')
+
+HITS_BLUE = "#1E4287"
+HITS_GREEN = "#019050"
+HITS_MAGENTA = "#c3006b"
+HITS_YELLOW = "#ffcc00"
+
+counts = {
+    '1': (0.5, HITS_BLUE),
+    '3': (0.2, HITS_MAGENTA),
+    '2': (0.1, HITS_YELLOW),
+    '4': (0.2, HITS_GREEN),
+}
+
+bottom = np.zeros(1)
+
+for k, (v,c) in counts.items():
+    p = ax.bar("1", v, width=1, label=k, bottom=bottom, color=c)
+    bottom += v
+
+    ax.bar_label(p, label_type='center', color='white')
+
+plt.show()
+```
+## Welcome to KIMMDY
+
+<https://hits-mbm-dev.github.io/kimmdy/>
+
+{{< qrcode https://hits-mbm-dev.github.io/kimmdy/ qr-kmdy width=250 height=250 colorDark='#1E4287'  >}}
+
+
+```bash
+pip install kimmdy
+```
+
+## Welcome to KIMMDY
+
+
+:::box
+![](img/yml-hover.png)
+
+![](img/yml-completion.png)
+:::
+
+## Welcome to KIMMDY
+
+::::{.box .large}
+:::b
+```yaml
+sequence:
+  - equilibrium
+  - mult: 4
+    tasks:
+    - reactions
+    - equilibrium
+```
+:::
+
+:::b
+![](img/yml-warning.png){.fragment #yml-warning}
+:::
+::::
+
+# Thank You!
+
+:::{#otter}
+![](./img/otter.png){width="30%"}
+:::
+
+## Thank You!
+
+![](./www/mbm-group.jpeg){#mbm-group2}
+
+{{< qrcode https://github.com/hits-mbm-dev/2024-hits-kimmdy qr width=124 height=124 colorDark='#1E4287' >}}
+
+::::{#bar}
+:::profile
+- [mbm.h-its.org](https://mbm.h-its.org){.bi-house}
+- [hits-mbm-dev](hhttps://github.com/hits-mbm-dev){.bi-github}
+- [jmbuhr](https://github.com/jmbuhr){.bi-github}
+- [jmbuhr.de](https://jmbuhr.de){.bi-house}
+:::
+:::{#acknowledge}
+This work was supported by the Klaus Tschira Foundation and has received funding from the European Research Council (ERC)
+:::
+::::
+
+## References
+
+:::{#refs}
+:::
+
+# Backup Slides
+
+## Topology
+
+::::{.column width=50%}
+```{dot}
+//| fig-height: 3
+//| fig-width: 3
+graph G {
+  layout=neato
+  overlap=true
+  node [shape="circle"]
+  "1 O"  -- "2 O" ;
+}
+```
+
+```{dot}
+//| fig-height: 3
+//| fig-width: 3
+graph G {
+  layout=neato
+  overlap=true
+  node [shape="circle"]
+  "1 H"  -- "2 O" ;
+  "3 H"  -- "2 O" ;
+}
+```
+
+```{dot}
+//| fig-height: 3
+//| fig-width: 5
+graph G {
+  layout=neato
+  overlap=true
+  rankdir=LR
+  node [shape="circle"]
+  "1"  -- "2" ;
+  "2"  -- "3" [penwidth=5];
+  "3"  -- "4" ;
+}
+```
+::::
+
+

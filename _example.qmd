@@ -1,0 +1,123 @@
+
+
+# Demos
+
+```{python}
+from kimmdy.config import Config
+from pathlib import Path
+from kimmdy.plugins import discover_plugins
+from kimmdy.parsing import read_top
+import kimmdy.analysis as analysis
+from kimmdy.topology.topology import Topology
+from pathlib import Path
+from kimmdy.tools import write_top_as_dot
+from kimmdy.cmd import kimmdy_run
+from src.utils import pushd
+
+discover_plugins()
+```
+
+```{python}
+with pushd("./examples/alanine_hat"):
+  config = Config(Path("kimmdy.yml"))
+```
+
+### Hydrogen Atom Transfer
+
+```{python}
+#| eval: false
+#| echo: true
+with pushd("./examples/alanine_hat"):
+  kimmdy_run()
+```
+
+<details>
+
+```{python}
+#| eval: true
+with pushd("./examples/alanine_hat"):
+  analysis.plot_rates('alanine_hat_010')
+```
+
+</details>
+
+
+```{python}
+#| eval: true
+with pushd("./examples/alanine_hat"):
+  analysis.radical_population('alanine_hat_010', open_plot=False, open_vmd=False)
+```
+
+
+```{python}
+#| eval: false
+with pushd("./examples/alanine_hat"):
+  analysis.concat_traj('alanine_hat_010', filetype='xtc', steps=['equilibrium'], open_vmd=True)
+```
+
+## Hydrolysis
+
+```{python}
+#| eval: false
+with pushd("./examples/hydrolysis"):
+  analysis.concat_traj("ala_custom", filetype="xtc", steps=["equilibrium", "relax"], open_vmd=True, output_group = "System")
+```
+
+## Topology
+
+```{python}
+#| eval: true
+ala_top = read_top(Path('./examples/alanine_hat/Ala_out.top'), use_gmx_dir=False)
+top = Topology(ala_top)
+
+write_top_as_dot(top, "./www/ala-top.dot")
+```
+
+```{python}
+print(top)
+```
+
+```{python}
+top.break_bond(('7', '8'))
+top.bind_bond(('8', '9'))
+```
+
+```{python}
+write_top_as_dot(top, "./www/ala-top-hat.dot")
+```
+
+:::: {layout-ncol=2}
+```{dot}
+//| echo: false
+//| label: fig-ala
+//| fig-cap: "A diagram of the Ala topology"
+//| file: ./www/ala-top.dot
+```
+
+```{dot}
+//| echo: false
+//| label: fig-ala-hat
+//| fig-cap: "A diagram of the Ala topology after HAT"
+//| file: ./www/ala-top-hat.dot
+```
+::::
+
+# Further Reading
+
+## Poster
+
+<https://github.com/hits-mbm-dev/kimmdy-poster-2.0>
+
+## Software Architecture
+
+{{< include _architecture.qmd >}}
+
+## More Analysis Tools
+
+```{python}
+#| eval: true
+with pushd("./examples/alanine_hat"):
+  analysis.plot_energy('alanine_hat_010', ['equilibrium'], terms=['Potential', 'Kinetic'])
+```
+
+

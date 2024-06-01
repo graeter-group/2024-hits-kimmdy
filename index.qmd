@@ -6,7 +6,7 @@ title: |
   Kinetic Monte Carlo
 # subtitle: Designing Software for Humans
 date: today
-date-format: long
+date-format: June 3, 2024
 author: Jannik Buhr, MBM
 institute: Heidelberg Institute for Theoretical Studies
 format:

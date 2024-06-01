@@ -27,6 +27,10 @@
   font-size: 3rem;
 }
 
+.reveal h3 {
+  font-size: 3rem;
+}
+
 .reveal .cent,
 .reveal .cent>p,
 .cent>img {
@@ -35,12 +39,65 @@
   width: fit-content;
 }
 
+.large {
+  font-size: 4rem;
+}
+
 
 .tiny {
   margin-top: 10%;
   font-size: 0.9rem;
 }
 
+#yml-warning {
+  margin-top: 0;
+}
+
+
+
+.black>p {
+  color: black;
+}
+
+/*.reveal div.sourceCode {*/
+/*  width: 100%;*/
+/*}*/
+
+.box {
+  display: flex;
+  align-content: first-baseline;
+  justify-content: space-between;
+}
+
+div .molstar-app {
+  height: 500px;
+  position: relative;
+  width: 100%;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+  max-width: 100%;
+}
+
+#meme-harmonic {
+  position: absolute;
+  top: 5%;
+  left: 0%;
+  z-index: 10;
+}
+
+#dice {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+}
+
+div.b>div>div>div>figure>p>img {
+  margin-bottom: 0;
+}
+
+.nb {
+  border-style: none;
+}
 
 .profile li {
   list-style: none;
@@ -48,10 +105,6 @@
 
 .profile li a::before {
   margin: 10px;
-}
-
-.reveal iframe {
-  height: 700px;
 }
 
 #bar {
@@ -97,105 +150,4 @@
 #acknowledge {
   font-size: 0.9rem;
   text-align: center;
-}
-
-.black>p {
-  color: black;
-}
-
-#skip {
-  /* border: 4px solid var(--hits-blue); */
-  border: 4px solid black;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 1rem;
-  padding: 0.5rem 1rem;
-  font-variant: small-caps;
-  z-index: 100;
-}
-
-/* grow on howver without shifting position */
-#skip:hover {
-  transform: scale(1.1);
-  transition: transform 0.2s;
-}
-
-#homolysis-broken {
-  position: absolute;
-  z-index: 0;
-  top: 50%;
-  display: block;
-}
-
-
-#workflow svg,
-#workflow-1 svg {
-  position: absolute;
-  z-index: -10;
-}
-
-#peptide {
-  position: absolute;
-  top: 55%;
-  left: 0;
-  display: block;
-  width: 25%;
-}
-
-.oh {
-  position: absolute;
-  top: 65%;
-  right: 10%;
-  display: block;
-  width: 12%;
-}
-
-.oh-attack {
-  position: absolute;
-  top: 20%;
-  right: -20%;
-  display: block;
-  width: 60%;
-}
-
-#ti {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40%;
-  display: block;
-}
-
-#workflow svg,
-#workflow-1 svg {
-  position: absolute;
-  z-index: -10;
-}
-
-.reveal div.sourceCode {
-  width: fit-content;
-}
-
-.bijection {
-  position: absolute;
-  bottom: 5%;
-  right: -10%;
-  display: block;
-  width: 30%;
-}
-
-
-.box {
-  display: flex;
-  align-content: first-baseline;
-  justify-content: space-between;
-}
-
-.large {
-  font-size: 5rem;
-}
-
-#yml-warning {
-  margin-top: 0;
 }

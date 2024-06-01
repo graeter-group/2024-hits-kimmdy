@@ -1,7 +1,10 @@
 ---
 title: |
-  KIMMDY: Reactive Molecular Dynamics Framework using Kinetic Monte Carlo
-subtitle: Designing Software for Humans
+  **KIMMDY**\
+  A Reactive Molecular Dynamics\
+  using\
+  Kinetic Monte Carlo
+# subtitle: Designing Software for Humans
 date: today
 date-format: long
 author: Jannik Buhr, MBM
@@ -10,6 +13,8 @@ format:
   hits-revealjs:
     width: 1920
     height: 1080
+    margin: 0.04
+    code-line-numbers: false
     title-slide-attributes:
       data-background-image: ./www/helix-wide.png
       data-background-color: white
@@ -43,8 +48,6 @@ execute:
   cache: false
 ---
 
-# Intro
-
 ```{python}
 import numpy as np
 from numpy import pi
@@ -53,19 +56,31 @@ import matplotlib.pyplot as plt
 plt.rcParams['figure.dpi'] = 100
 ```
 
-## Simulating Molecular Systems
+## Collagen has interesting chemistry under mechanical stress {background-image='./img/collagen.png' background-color=black}
+
+## Simulating (large) Molecular Systems
+
+::: {.columns}
+::: {.column width="50%"}
+![](img/monkey.png){width="90%"}
+:::
+:::{.column width="50%"}
+### Bonds do not exist.
+:::{.r-stack .center}
+![](./img/molecule-cpk.png)
+
+![](./img/molecule-vdw.png){.fragment}
+
+![](./img/molecule-density.png){.fragment}
+:::
+
+### But let's pretend they do. {.fragment}
+:::
+:::
 
 ## Molecular Dynamics / Molecular Mechanics
 
 {{< mol-url ./examples/alanine_hat/just-ala.gro >}}
-
-## Force Fields
-
-### Bonds, Angles, Dihedrals
-
-
-
-
 
 ::::box
 :::b
@@ -103,13 +118,13 @@ plt.show()
 
 :::b
 :::{#dihedral}
-$$V(\phi) = k_\phi (1 + \cos(n \phi - \delta))$$
+$$V_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \delta))$$
 :::
 ```{python}
-x = np.linspace(-pi, pi, 100)
-y = 1 + np.cos(2 * x - 0.5)
+x = np.linspace(0, 2*pi, 100)
+y = 1 + np.cos(2 * x - pi)
 
-plt.subplots(figsize=(5,3))
+plt.subplots(figsize=(4,2))
 plt.axis('off')
 plt.plot(x, y, color='black', linewidth=5)
 plt.show()
@@ -117,14 +132,62 @@ plt.show()
 :::
 ::::
 
-## But what about Chemistry?
+:::{#meme-harmonic .fragment}
+![](img/meme-harmonic.png)
+:::
 
-## Monte Carlo is just rolling dice
+# But what about Chemistry?
 
+## Welcome to KIMMDY!
+
+_Project with Kai Riedmiller and Eric Hartmann_
+
+<https://hits-mbm-dev.github.io/kimmdy/>
+
+
+{{< qrcode https://hits-mbm-dev.github.io/kimmdy/ qr-kmdy width=250 height=250 colorDark='#1E4287'  >}}
+
+::: {.columns}
+
+::: {.column width="20%"}
+```bash
+pip install kimmdy
+```
+
+```bash
+edit kimmdy.yml
+```
+:::
+
+::: {.column width="50%"}
+
+:::{#dice .fragment}
+![](img/dice.png){width="30%"}
+:::
+
+```{dot}
+//| fig-height: 8
+//| fig-width: 3
+digraph L {
+
+  edge [minlen="1"]
+  node [shape=rect fontname="Miriam Libre" style=filled fillcolor=white fontsize=8];
+
+  md [ label="Run MD" fillcolor="#1e42870d"];
+  reactions [ label="Query Reactions" fillcolor="#1e42873d"];
+  mc [label="Choose Reaction" fillcolor="#1e42870d"];
+  execute [label="Execute Reaction" fillcolor="#1e42870d"];
+
+  md -> reactions -> mc -> execute -> md;
+
+}
+```
+:::
+::: {.column width="30%" .fragment}
 
 ```{python}
 fig, ax = plt.subplots(figsize=(1,5))
-plt.axis('off')
+# plt.axis('off')
 
 HITS_BLUE = "#1E4287"
 HITS_GREEN = "#019050"
@@ -141,37 +204,20 @@ counts = {
 bottom = np.zeros(1)
 
 for k, (v,c) in counts.items():
-    p = ax.bar("1", v, width=1, label=k, bottom=bottom, color=c)
+    p = ax.bar(" ", v, width=1, label=k, bottom=bottom, color=c)
     bottom += v
 
     ax.bar_label(p, label_type='center', color='white')
 
 plt.show()
 ```
-## Welcome to KIMMDY
-
-<https://hits-mbm-dev.github.io/kimmdy/>
-
-{{< qrcode https://hits-mbm-dev.github.io/kimmdy/ qr-kmdy width=250 height=250 colorDark='#1E4287'  >}}
-
-
-```bash
-pip install kimmdy
-```
-
-## Welcome to KIMMDY
-
-
-:::box
-![](img/yml-hover.png)
-
-![](img/yml-completion.png)
+:::
 :::
 
-## Welcome to KIMMDY
+## Define your own workflow
 
-::::{.box .large}
-:::b
+::::{.columns}
+:::{.column width="30%" .large}
 ```yaml
 sequence:
   - equilibrium
@@ -182,10 +228,43 @@ sequence:
 ```
 :::
 
-:::b
+:::{.column width="70%"}
 ![](img/yml-warning.png){.fragment #yml-warning}
 :::
 ::::
+
+::::{.columns}
+:::{.column width="30%" .large}
+:::
+:::{.column width="70%"}
+:::
+::::
+
+
+## KIMMDY is user-friendly
+
+::::{.columns}
+:::{.column width="30%"}
+- **checks** and **documentation**
+  right in your editor
+:::
+:::{.column width="70%"}
+:::{.r-stack}
+![](img/yml-hover.png)
+
+![](img/yml-completion.png){.fragment}
+:::
+:::
+::::
+
+
+## KIMMDY is extensible
+
+- You can define your own reactions!
+- Simple python plugin
+- Take **state** of the system
+- Return **rates** and **recipes**
+
 
 # Thank You!
 

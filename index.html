@@ -15,8 +15,8 @@
   <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Jannik Buhr, MBM">
-  <meta name="dcterms.date" content="2024-05-29">
-  <title>KIMMDY: Reactive Molecular Dynamics Framework using Kinetic Monte Carlo</title>
+  <meta name="dcterms.date" content="2024-06-01">
+  <title>KIMMDY A Reactive Molecular Dynamics using Kinetic Monte Carlo</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -419,8 +419,10 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="white" data-background-image="./www/helix-wide.png" data-background-position="center bottom -10%" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title"><p>KIMMDY: Reactive Molecular Dynamics Framework using Kinetic Monte Carlo</p></h1>
-  <p class="subtitle">Designing Software for Humans</p>
+  <h1 class="title"><p><strong>KIMMDY</strong><br>
+A Reactive Molecular Dynamics<br>
+using<br>
+Kinetic Monte Carlo</p></h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -433,15 +435,26 @@ Jannik Buhr, MBM
     </div>
 </div>
 
-  <p class="date">May 29, 2024</p>
+  <p class="date">June 1, 2024</p>
 </section>
-<section>
-<section id="intro" class="title-slide slide level1 center">
-<h1>Intro</h1>
-
+<section id="collagen-has-interesting-chemistry-under-mechanical-stress" class="slide level2" data-background-image="./img/collagen.png" data-background-color="black">
+<h2>Collagen has interesting chemistry under mechanical stress</h2>
 </section>
-<section id="simulating-molecular-systems" class="slide level2">
-<h2>Simulating Molecular Systems</h2>
+<section id="simulating-large-molecular-systems" class="slide level2">
+<h2>Simulating (large) Molecular Systems</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="img/monkey.png" class="img-fluid" style="width:90.0%"></p>
+</div><div class="column" style="width:50%;">
+<h3 id="bonds-do-not-exist.">Bonds do not exist.</h3>
+<div class="r-stack center">
+<p><img data-src="./img/molecule-cpk.png" class="img-fluid"></p>
+<p><img data-src="./img/molecule-vdw.png" class="fragment img-fluid"></p>
+<p><img data-src="./img/molecule-density.png" class="fragment img-fluid"></p>
+</div>
+<h3 class="fragment" id="but-lets-pretend-they-do.">But let’s pretend they do.</h3>
+</div>
+</div>
 </section>
 <section id="molecular-dynamics-molecular-mechanics" class="slide level2">
 <h2>Molecular Dynamics / Molecular Mechanics</h2>
@@ -454,7 +467,7 @@ Jannik Buhr, MBM
     <body>
     <div id=&quot;app-./examples/alanine_hat/just-ala.gro&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutShowControls&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowSequence&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutIsExpanded&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowExpand&quot;:true}).then(viewer => {
+    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;layoutShowControls&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLog&quot;:false,&quot;layoutShowSequence&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowExpand&quot;:true,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
     viewer.loadStructureFromUrl(&quot;./examples/alanine_hat/just-ala.gro&quot;, format=&quot;gro&quot;);    });
     </script>
     </body>
@@ -462,16 +475,12 @@ Jannik Buhr, MBM
     ">
     </iframe>
     
-</section>
-<section id="force-fields" class="slide level2">
-<h2>Force Fields</h2>
-<h3 id="bonds-angles-dihedrals">Bonds, Angles, Dihedrals</h3>
 <div class="box">
 <div class="b">
 <div id="morse">
 <p><span class="math display">\[V_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2\]</span></p>
 </div>
-<div id="106bf756" class="cell" data-execution_count="2">
+<div id="e0c815f8" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -485,7 +494,7 @@ Jannik Buhr, MBM
 <div id="harmonic">
 <p><span class="math display">\[V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2\]</span></p>
 </div>
-<div id="7cb017a2" class="cell" data-execution_count="3">
+<div id="0682a5b9" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -497,9 +506,9 @@ Jannik Buhr, MBM
 </div>
 <div class="b">
 <div id="dihedral">
-<p><span class="math display">\[V(\phi) = k_\phi (1 + \cos(n \phi - \delta))\]</span></p>
+<p><span class="math display">\[V_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \delta))\]</span></p>
 </div>
-<div id="8b838fb3" class="cell" data-execution_count="4">
+<div id="5f128d7c" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -510,46 +519,154 @@ Jannik Buhr, MBM
 </div>
 </div>
 </div>
+<div id="meme-harmonic" class="fragment">
+<p><img data-src="img/meme-harmonic.png" class="img-fluid"></p>
+</div>
 </section>
-<section id="but-what-about-chemistry" class="slide level2">
-<h2>But what about Chemistry?</h2>
-</section>
-<section id="monte-carlo-is-just-rolling-dice" class="slide level2">
-<h2>Monte Carlo is just rolling dice</h2>
+<section>
+<section id="but-what-about-chemistry" class="title-slide slide level1 center">
+<h1>But what about Chemistry?</h1>
 
-<img data-src="index_files/figure-revealjs/cell-6-output-1.png" class="img-fluid r-stretch"></section>
+</section>
 <section id="welcome-to-kimmdy" class="slide level2">
-<h2>Welcome to KIMMDY</h2>
+<h2>Welcome to KIMMDY!</h2>
+<p><em>Project with Kai Riedmiller and Eric Hartmann</em></p>
 <p><a href="https://hits-mbm-dev.github.io/kimmdy/" class="uri">https://hits-mbm-dev.github.io/kimmdy/</a></p>
 <div id="qr-kmdy" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","text":"https://hits-mbm-dev.github.io/kimmdy/","colorDark":"#1E4287","width":"250","height":"250"});
+var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","text":"https://hits-mbm-dev.github.io/kimmdy/","width":"250","colorDark":"#1E4287","height":"250"});
 </script>
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">pip</span> install kimmdy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="welcome-to-kimmdy-1" class="slide level2">
-<h2>Welcome to KIMMDY</h2>
-<div class="box">
-<p><img data-src="img/yml-hover.png" class="img-fluid"></p>
-<p><img data-src="img/yml-completion.png" class="img-fluid"></p>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kimmdy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">edit</span> kimmdy.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div id="dice" class="fragment">
+<p><img data-src="img/dice.png" class="img-fluid" style="width:30.0%"></p>
+</div>
+<div class="cell" data-fig-height="8" data-fig-width="3" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="288" height="768" viewbox="0.00 0.00 110.31 260.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
+<title>L</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 106.31,-256 106.31,4 -4,4"></polygon>
+<!-- md -->
+<g id="node1" class="node">
+<title>md</title>
+<polygon fill="#1e4287" fill-opacity="0.050980" stroke="black" points="93.22,-252 39.22,-252 39.22,-216 93.22,-216 93.22,-252"></polygon>
+<text text-anchor="middle" x="66.22" y="-231.6" font-family="Miriam Libre" font-size="8.00">Run MD</text>
+</g>
+<!-- reactions -->
+<g id="node2" class="node">
+<title>reactions</title>
+<polygon fill="#1e4287" fill-opacity="0.239216" stroke="black" points="69.76,-180 0.68,-180 0.68,-144 69.76,-144 69.76,-180"></polygon>
+<text text-anchor="middle" x="35.22" y="-159.6" font-family="Miriam Libre" font-size="8.00">Query Reactions</text>
+</g>
+<!-- md&#45;&gt;reactions -->
+<g id="edge1" class="edge">
+<title>md-&gt;reactions</title>
+<path fill="none" stroke="black" d="M58.55,-215.7C55.03,-207.73 50.76,-198.1 46.85,-189.26"></path>
+<polygon fill="black" stroke="black" points="50.04,-187.83 42.79,-180.1 43.64,-190.67 50.04,-187.83"></polygon>
+</g>
+<!-- mc -->
+<g id="node3" class="node">
+<title>mc</title>
+<polygon fill="#1e4287" fill-opacity="0.050980" stroke="black" points="70.65,-108 -0.22,-108 -0.22,-72 70.65,-72 70.65,-108"></polygon>
+<text text-anchor="middle" x="35.22" y="-87.6" font-family="Miriam Libre" font-size="8.00">Choose Reaction</text>
+</g>
+<!-- reactions&#45;&gt;mc -->
+<g id="edge2" class="edge">
+<title>reactions-&gt;mc</title>
+<path fill="none" stroke="black" d="M35.22,-143.7C35.22,-135.98 35.22,-126.71 35.22,-118.11"></path>
+<polygon fill="black" stroke="black" points="38.72,-118.1 35.22,-108.1 31.72,-118.1 38.72,-118.1"></polygon>
+</g>
+<!-- execute -->
+<g id="node4" class="node">
+<title>execute</title>
+<polygon fill="#1e4287" fill-opacity="0.050980" stroke="black" points="102.41,-36 30.02,-36 30.02,0 102.41,0 102.41,-36"></polygon>
+<text text-anchor="middle" x="66.22" y="-15.6" font-family="Miriam Libre" font-size="8.00">Execute Reaction</text>
+</g>
+<!-- mc&#45;&gt;execute -->
+<g id="edge3" class="edge">
+<title>mc-&gt;execute</title>
+<path fill="none" stroke="black" d="M42.88,-71.7C46.41,-63.73 50.67,-54.1 54.59,-45.26"></path>
+<polygon fill="black" stroke="black" points="57.79,-46.67 58.64,-36.1 51.39,-43.83 57.79,-46.67"></polygon>
+</g>
+<!-- execute&#45;&gt;md -->
+<g id="edge4" class="edge">
+<title>execute-&gt;md</title>
+<path fill="none" stroke="black" d="M71.63,-36.47C74.51,-46.71 77.76,-59.96 79.22,-72 84.98,-119.65 84.98,-132.35 79.22,-180 78.19,-188.47 76.28,-197.53 74.24,-205.72"></path>
+<polygon fill="black" stroke="black" points="70.82,-204.97 71.63,-215.53 77.58,-206.77 70.82,-204.97"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column fragment" style="width:30%;">
+<div id="b7b70292" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/cell-6-output-1.png" class="img-fluid"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
-<section id="welcome-to-kimmdy-2" class="slide level2">
-<h2>Welcome to KIMMDY</h2>
-<div class="box large">
-<div class="b">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href=""></a><span class="fu">sequence</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> equilibrium</span></span>
-<span id="cb2-3"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">mult</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
-<span id="cb2-4"><a href=""></a><span class="at">    </span><span class="fu">tasks</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> reactions</span></span>
-<span id="cb2-6"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> equilibrium</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="b">
+<section id="define-your-own-workflow" class="slide level2">
+<h2>Define your own workflow</h2>
+<div class="columns">
+<div class="column large" style="width:30%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> equilibrium</span></span>
+<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">mult</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
+<span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> reactions</span></span>
+<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> equilibrium</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:70%;">
 <p><img data-src="img/yml-warning.png" id="yml-warning" class="fragment img-fluid"></p>
 </div>
 </div>
+<div class="columns">
+<div class="column large" style="width:30%;">
+
+</div><div class="column" style="width:70%;">
+
+</div>
+</div>
+</section>
+<section id="kimmdy-is-user-friendly" class="slide level2">
+<h2>KIMMDY is user-friendly</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ul>
+<li><strong>checks</strong> and <strong>documentation</strong> right in your editor</li>
+</ul>
+</div><div class="column" style="width:70%;">
+<div class="r-stack">
+<p><img data-src="img/yml-hover.png" class="img-fluid"></p>
+<p><img data-src="img/yml-completion.png" class="fragment img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="kimmdy-is-extensible" class="slide level2">
+<h2>KIMMDY is extensible</h2>
+<ul>
+<li>You can define your own reactions!</li>
+<li>Simple python plugin</li>
+<li>Take <strong>state</strong> of the system</li>
+<li>Return <strong>rates</strong> and <strong>recipes</strong></li>
+</ul>
 </section></section>
 <section>
 <section id="thank-you" class="title-slide slide level1 center">
@@ -563,7 +680,7 @@ var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","text":"https://hits-
 
 <img data-src="./www/mbm-group.jpeg" id="mbm-group2" class="img-fluid r-stretch"><div id="qr" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr", {"colorLight":"#ffffff","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy","colorDark":"#1E4287","width":"124","height":"124"});
+var qrcode = new QRCode("qr", {"colorLight":"#ffffff","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy","width":"124","colorDark":"#1E4287","height":"124"});
 </script>
     
 <div id="bar">
@@ -917,7 +1034,7 @@ var qrcode = new QRCode("qr", {"colorLight":"#ffffff","text":"https://github.com
         height: 1080,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 4.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',

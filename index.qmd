@@ -213,6 +213,23 @@ plt.show()
 :::
 :::
 
+## Welcome to KIMMDY!
+
+::::{.columns}
+:::{.column width="30%"}
+### Builtin Reactions
+
+- **Homolysis**
+- **Hydrogen Atom Transfer** (HAT)
+- **Hydrolysis**
+
+### Analysis Tools
+:::
+:::{.column width="70%"}
+:::
+::::
+
+
 ## Define your own workflow
 
 ::::{.columns}
@@ -239,7 +256,6 @@ sequence:
 :::
 ::::
 
-
 ## KIMMDY is user-friendly
 
 ::::{.columns}
@@ -256,13 +272,26 @@ sequence:
 :::
 ::::
 
-
 ## KIMMDY is extensible
 
 - You can define your own reactions!
 - Simple python plugin
 - Take **state** of the system
 - Return **rates** and **recipes**
+
+```
+(.venv) $ kimmdy --show-plugins
+
+Available reaction plugins:
+dummyreaction
+hat_naive
+homolysis
+hydrolysis_naive
+hat_reaction
+
+Available parameterization plugins:
+grappa
+```
 
 
 # Thank You!

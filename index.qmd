@@ -40,7 +40,6 @@ mermaid-format: png
 nocite:
   - "@quarto"
 engine: jupyter
-self-contained: false
 execute:
   eval: true
   echo: false

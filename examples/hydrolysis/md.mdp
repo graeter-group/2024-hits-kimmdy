@@ -1,15 +1,15 @@
 title                   = OPLS Lysozyme NPT equilibration 
 ; Run parameters
 integrator              = md        ; leap-frog integrator
-nsteps                  = 100000      ; 0.002 * 100000 = 200ps 
-dt                      = 0.002     ; 2 fs
+nsteps                  = 10000      ; 0.001 * 10000 = 20ps
+dt                      = 0.001     ; 1 fs
 ; Output control
-nstenergy               = 500       
-nstlog                  = 500      
+nstenergy               = 500
+nstlog                  = 500
 nstxout                 = 500
 nstvout                 = 500
 nstfout                 = 500
-nstxout-compressed      = 500       ; save compressed coordinates every 1.0 ps
+nstxout-compressed      = 10        ; save compressed coordinates every 0.01 ps
 compressed-x-grps       = System    ; save the whole system
 ; Bond parameters
 continuation            = yes       ; Restarting after NPT 

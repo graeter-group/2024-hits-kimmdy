@@ -38,7 +38,7 @@ favicon: ./www/hits-logo.png
 bibliography: ./references.bib
 mermaid-format: png
 nocite:
-  - "@quarto"
+  - "@allaireQuarto2022c"
 engine: jupyter
 execute:
   eval: true
@@ -178,6 +178,17 @@ _Project with Kai Riedmiller and Eric Hartmann_
 
 {{< qrcode https://hits-mbm-dev.github.io/kimmdy/ qr-kmdy width=250 height=250 colorDark='#1E4287'  >}}
 
+![](./img/ala-rad.png){#ala-rad}
+
+<style>
+#ala-rad {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 40%;
+}
+</style>
+
 ::: {.columns}
 
 ::: {.column width="20%"}
@@ -185,16 +196,13 @@ _Project with Kai Riedmiller and Eric Hartmann_
 pip install kimmdy
 ```
 
+
 ```bash
 edit kimmdy.yml
 ```
 :::
 
 ::: {.column width="50%"}
-
-:::{#dice .fragment}
-![](img/dice.png){width="30%"}
-:::
 
 ```{dot}
 //| fig-height: 8
@@ -245,22 +253,10 @@ plt.show()
 :::
 :::
 
-## Welcome to KIMMDY!
 
-::::{.columns}
-:::{.column width="30%"}
-### Builtin Reactions
-
-- **Homolysis**
-- **Hydrogen Atom Transfer** (HAT)
-- **Hydrolysis**
-
-### Analysis Tools
+:::{#dice .fragment}
+![](img/dice.png){width="30%"}
 :::
-:::{.column width="70%"}
-:::
-::::
-
 
 ## Define your own workflow
 
@@ -304,26 +300,28 @@ sequence:
 :::
 ::::
 
+
 ## KIMMDY is extensible
 
-- You can define your own reactions!
+::::{.columns}
+:::{.column width="30%"}
+### Builtin Reactions
+
+- **Homolysis**
+- **Hydrogen Atom Transfer** (HAT)
+
+### Define your own reactions
+
 - Simple python plugin
 - Take **state** of the system
 - Return **rates** and **recipes**
-
-```
-(.venv) $ kimmdy --show-plugins
-
-Available reaction plugins:
-dummyreaction
-hat_naive
-homolysis
-hydrolysis_naive
-hat_reaction
-
-Available parameterization plugins:
-grappa
-```
+- KIMMDY takes care of topology details
+:::
+:::{.column width="70%" .fragment}
+e.g. Hydrolysis
+![](./www/hydrolysis.mp4)
+:::
+::::
 
 
 # Thank You!
@@ -334,7 +332,9 @@ grappa
 
 ## Thank You!
 
-![](./www/mbm-group.jpeg){#mbm-group2}
+:::#mbm-group
+![](./www/mbm-group.jpeg){width="80%"}
+:::
 
 {{< qrcode https://github.com/hits-mbm-dev/2024-hits-kimmdy qr width=124 height=124 colorDark='#1E4287' >}}
 

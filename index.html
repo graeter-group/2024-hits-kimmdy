@@ -468,7 +468,7 @@ Jannik Buhr, MBM
     <body>
     <div id=&quot;app-./examples/alanine_hat/just-ala.gro&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLog&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLeftPanel&quot;:true}).then(viewer => {
+    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowSequence&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowControls&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLog&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
     viewer.loadStructureFromUrl(&quot;./examples/alanine_hat/just-ala.gro&quot;, format=&quot;gro&quot;);    });
     </script>
     </body>
@@ -481,7 +481,7 @@ Jannik Buhr, MBM
 <div id="morse">
 <p><span class="math display">\[V_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2\]</span></p>
 </div>
-<div id="b0a08a58" class="cell" data-execution_count="2">
+<div id="1bdb28b3" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -495,7 +495,7 @@ Jannik Buhr, MBM
 <div id="harmonic">
 <p><span class="math display">\[V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2\]</span></p>
 </div>
-<div id="6947ea2b" class="cell" data-execution_count="3">
+<div id="d9c0eff3" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -509,7 +509,7 @@ Jannik Buhr, MBM
 <div id="dihedral">
 <p><span class="math display">\[V_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \delta))\]</span></p>
 </div>
-<div id="6b5171d0" class="cell" data-execution_count="4">
+<div id="b985d24b" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -568,17 +568,23 @@ C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01</code></pre>
 <p><a href="https://hits-mbm-dev.github.io/kimmdy/" class="uri">https://hits-mbm-dev.github.io/kimmdy/</a></p>
 <div id="qr-kmdy" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287","width":"250","height":"250","text":"https://hits-mbm-dev.github.io/kimmdy/"});
+var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287","height":"250","width":"250","text":"https://hits-mbm-dev.github.io/kimmdy/"});
 </script>
     
+<p><img data-src="./img/ala-rad.png" id="ala-rad" class="img-fluid"></p>
+<style>
+#ala-rad {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 40%;
+}
+</style>
 <div class="columns">
 <div class="column" style="width:20%;">
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kimmdy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">edit</span> kimmdy.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div id="dice" class="fragment">
-<p><img data-src="img/dice.png" class="img-fluid" style="width:30.0%"></p>
-</div>
 <div class="cell" data-fig-height="8" data-fig-width="3" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -644,7 +650,7 @@ var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287"
 </div>
 </div>
 </div><div class="column fragment" style="width:30%;">
-<div id="d7e89720" class="cell" data-execution_count="5">
+<div id="0b396990" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -655,21 +661,8 @@ var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287"
 </div>
 </div>
 </div>
-</section>
-<section id="welcome-to-kimmdy-1" class="slide level2">
-<h2>Welcome to KIMMDY!</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<h3 id="builtin-reactions">Builtin Reactions</h3>
-<ul>
-<li><strong>Homolysis</strong></li>
-<li><strong>Hydrogen Atom Transfer</strong> (HAT)</li>
-<li><strong>Hydrolysis</strong></li>
-</ul>
-<h3 id="analysis-tools">Analysis Tools</h3>
-</div><div class="column" style="width:70%;">
-
-</div>
+<div id="dice" class="fragment">
+<p><img data-src="img/dice.png" class="img-fluid" style="width:30.0%"></p>
 </div>
 </section>
 <section id="define-your-own-workflow" class="slide level2">
@@ -711,23 +704,24 @@ var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287"
 </section>
 <section id="kimmdy-is-extensible" class="slide level2">
 <h2>KIMMDY is extensible</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<h3 id="builtin-reactions">Builtin Reactions</h3>
 <ul>
-<li>You can define your own reactions!</li>
+<li><strong>Homolysis</strong></li>
+<li><strong>Hydrogen Atom Transfer</strong> (HAT)</li>
+</ul>
+<h3 id="define-your-own-reactions">Define your own reactions</h3>
+<ul>
 <li>Simple python plugin</li>
 <li>Take <strong>state</strong> of the system</li>
 <li>Return <strong>rates</strong> and <strong>recipes</strong></li>
+<li>KIMMDY takes care of topology details</li>
 </ul>
-<pre><code>(.venv) $ kimmdy --show-plugins
-
-Available reaction plugins:
-dummyreaction
-hat_naive
-homolysis
-hydrolysis_naive
-hat_reaction
-
-Available parameterization plugins:
-grappa</code></pre>
+</div><div class="column fragment" style="width:70%;">
+<p>e.g.&nbsp;Hydrolysis <video data-src="./www/hydrolysis.mp4" class="img-fluid" controls=""><a href="./www/hydrolysis.mp4">Video</a></video></p>
+</div>
+</div>
 </section>
 <section>
 <section id="thank-you" class="title-slide slide level1 center">
@@ -738,10 +732,12 @@ grappa</code></pre>
 </section>
 <section id="thank-you-1" class="slide level2">
 <h2>Thank You!</h2>
-
-<img data-src="./www/mbm-group.jpeg" id="mbm-group2" class="img-fluid r-stretch"><div id="qr" class="qrcode"></div>
+<div class="#mbm-group">
+<p><img data-src="./www/mbm-group.jpeg" class="img-fluid" style="width:80.0%"></p>
+</div>
+<div id="qr" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr", {"colorLight":"#ffffff","colorDark":"#1E4287","width":"124","height":"124","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy"});
+var qrcode = new QRCode("qr", {"colorLight":"#ffffff","colorDark":"#1E4287","height":"124","width":"124","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy"});
 </script>
     
 <div id="bar">
@@ -763,6 +759,9 @@ var qrcode = new QRCode("qr", {"colorLight":"#ffffff","colorDark":"#1E4287","wid
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-alievMotionalTimescalePredictions2014" class="csl-entry" role="listitem">
 Aliev, Abil E, Martin Kulke, Harmeet S Khaneja, Vijay Chudasama, Tom D Sheppard, and Rachel M Lanigan. 2014. <span>“Motional Timescale Predictions by Molecular Dynamics Simulations: Case Study Using Proline and Hydroxyproline Sidechain Dynamics.”</span> <a href="https://doi.org/10.1002/prot.24350">https://doi.org/10.1002/prot.24350</a>.
+</div>
+<div id="ref-allaireQuarto2022c" class="csl-entry" role="listitem">
+Allaire, J. J., Charles Teague, Carlos Scheidegger, Yihui Xie, and Christophe Dervieux. 2022. <span>“Quarto.”</span> <a href="https://github.com/quarto-dev/quarto-cli">https://github.com/quarto-dev/quarto-cli</a>.
 </div>
 <div id="ref-cornellSecondGenerationForce1995" class="csl-entry" role="listitem">
 Cornell, Wendy D., Piotr Cieplak, Christopher I. Bayly, Ian R. Gould, Kenneth M. Merz, David M. Ferguson, David C. Spellmeyer, Thomas Fox, James W. Caldwell, and Peter A. Kollman. 1995. <span>“A Second Generation Force Field for the Simulation of Proteins, Nucleic Acids, and Organic Molecules.”</span> <a href="https://doi.org/10.1021/ja00124a002">https://doi.org/10.1021/ja00124a002</a>.

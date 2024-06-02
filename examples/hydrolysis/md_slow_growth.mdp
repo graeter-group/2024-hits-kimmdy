@@ -9,7 +9,7 @@ nstlog                  = 1000       ; update log file every 1 ps
 nstxout                 = 1000
 nstvout                 = 1000
 nstfout                 = 1000
-nstxout-compressed      = 1000       ; save compressed coordinates every 1.0 ps
+nstxout-compressed      = 10       ; save compressed coordinates every 0.01 ps
 compressed-x-grps       = System    ; save the whole system
 ; Bond parameters
 continuation            = yes       ; Restarting after NPT 

@@ -8,15 +8,15 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/quarto-contrib/qrcodejs-v1.0.0/qrcode.js"></script>
 <script src="index_files/libs/quarto-contrib/molstar-v3.13.0/molstar.js"></script>
 <link href="index_files/libs/quarto-contrib/molstar-v3.13.0/molstar.css" rel="stylesheet">
-<link href="index_files/libs/quarto-contrib/molstar-v3.13.0/app-container.css" rel="stylesheet">
-<script src="index_files/libs/quarto-contrib/qrcodejs-v1.0.0/qrcode.js"></script><meta charset="utf-8">
+<link href="index_files/libs/quarto-contrib/molstar-v3.13.0/app-container.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Jannik Buhr, MBM">
   <meta name="dcterms.date" content="2024-06-03">
-  <title>KIMMDY A Reactive Molecular Dynamics using Kinetic Monte Carlo</title>
+  <title>KIMMDY Reactive Molecular Dynamics using Kinetic Monte Carlo</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -421,7 +421,7 @@
 
 <section id="title-slide" data-background-color="white" data-background-image="./www/helix-wide.png" data-background-position="center bottom -10%" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title"><p><strong>KIMMDY</strong><br>
-A Reactive Molecular Dynamics<br>
+Reactive Molecular Dynamics<br>
 using<br>
 Kinetic Monte Carlo</p></h1>
 
@@ -441,47 +441,41 @@ Jannik Buhr, MBM
 <section id="collagen-has-interesting-chemistry-under-mechanical-stress" class="slide level2" data-background-image="./img/collagen.png" data-background-color="black">
 <h2>Collagen has interesting chemistry under mechanical stress</h2>
 </section>
-<section id="simulating-large-molecular-systems" class="slide level2">
-<h2>Simulating (large) Molecular Systems</h2>
+<section id="how-do-we-simulating-large-molecular-systems" class="slide level2">
+<h2>How do we simulating (large) molecular systems?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="img/monkey.png" class="img-fluid" style="width:90.0%"></p>
 </div><div class="column" style="width:50%;">
 <h3 id="bonds-do-not-exist.">Bonds do not exist.</h3>
 <div class="r-stack center">
-<p><img data-src="./img/molecule-cpk.png" class="img-fluid"></p>
-<p><img data-src="./img/molecule-vdw.png" class="fragment img-fluid"></p>
+<p><img data-src="./img/molecule-vdw.png" class="img-fluid"></p>
 <p><img data-src="./img/molecule-density.png" class="fragment img-fluid"></p>
+<p><img data-src="./img/molecule-cpk.png" class="fragment img-fluid"></p>
 </div>
 <h3 class="fragment" id="but-lets-pretend-they-do.">But let’s pretend they do.</h3>
 </div>
 </div>
 </section>
-<section id="molecular-dynamics-molecular-mechanics" class="slide level2">
-<h2>Molecular Dynamics / Molecular Mechanics</h2>
-    <iframe id="app-./examples/alanine_hat/just-ala.gro" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
-    <html>
-    <head>
-    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
-    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
-    </head>
-    <body>
-    <div id=&quot;app-./examples/alanine_hat/just-ala.gro&quot; class=&quot;molstar-app&quot;></div>
-    <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowSequence&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowControls&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLog&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
-    viewer.loadStructureFromUrl(&quot;./examples/alanine_hat/just-ala.gro&quot;, format=&quot;gro&quot;);    });
-    </script>
-    </body>
-    </html>
-    ">
-    </iframe>
-    
-<div class="box">
-<div class="b">
-<div id="morse">
-<p><span class="math display">\[V_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2\]</span></p>
+<section id="molecular-dynamics-molecular-mechanics-newton-to-the-rescue" class="slide level2">
+<h2>Molecular Dynamics / Molecular Mechanics – Newton to the rescue!</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span class="math display">\[E_{total} = E_{bonded} + E_{nonbonded}\]</span> <span class="math display">\[E_{bonded}=E_{\text{bond}}+E_{\text{angle}}+E_{\text{dihedral}}\]</span> <span class="math display">\[E_{nonbonded} = E_{\text{electrostatic}} + E_{\text{van der Waals}}\]</span></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="./img/molecule-cpk.png" id="mol1" class="img-fluid"></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="./img/molecule-cpk.png" id="mol2" class="img-fluid"></p>
 </div>
-<div id="1bdb28b3" class="cell" data-execution_count="2">
+</div>
+<h3 class="fragment" id="popular-potential-energy-functions">Popular Potential Energy Functions</h3>
+<hr>
+<div class="columns">
+<div class="column fragment" style="width:30%;">
+<div id="oh">
+<p><img data-src="./img/hyd-oh.png" class="img-fluid"></p>
+</div>
+<div id="26830b12" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -490,12 +484,12 @@ Jannik Buhr, MBM
 </div>
 </div>
 </div>
+<p><span class="math display">\[E_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2\]</span></p>
+</div><div class="column fragment" style="width:30%;">
+<div id="water">
+<p><img data-src="./img/water.png" class="img-fluid"></p>
 </div>
-<div class="b">
-<div id="harmonic">
-<p><span class="math display">\[V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2\]</span></p>
-</div>
-<div id="d9c0eff3" class="cell" data-execution_count="3">
+<div id="26746ac3" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -504,12 +498,9 @@ Jannik Buhr, MBM
 </div>
 </div>
 </div>
-</div>
-<div class="b">
-<div id="dihedral">
-<p><span class="math display">\[V_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \delta))\]</span></p>
-</div>
-<div id="b985d24b" class="cell" data-execution_count="4">
+<p><span class="math display">\[E_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2\]</span></p>
+</div><div class="column fragment" style="width:30%;">
+<div id="3ce1a0a2" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -518,10 +509,11 @@ Jannik Buhr, MBM
 </div>
 </div>
 </div>
+<p><span class="math display">\[E_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \phi_0))\]</span></p>
 </div>
 </div>
 <div id="meme-harmonic" class="fragment">
-<p><img data-src="img/meme-harmonic.png" class="img-fluid"></p>
+<p><img data-src="img/meme-harmonic.png" class="img-fluid" style="width:85.0%"></p>
 </div>
 </section>
 <section id="force-fields-list-the-parameters-for-these-potentials" class="slide level2">
@@ -556,6 +548,9 @@ C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01</code></pre>
 [ angletypes ]
 ...</code></pre>
 </div>
+<div id="harmonic">
+<p><span class="math display">\[V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2\]</span></p>
+</div>
 </div><div class="column" style="width:50%;">
 <p><img data-src="./img/molecule-cpk.png" class="img-fluid"></p>
 </div>
@@ -568,7 +563,7 @@ C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01</code></pre>
 <p><a href="https://hits-mbm-dev.github.io/kimmdy/" class="uri">https://hits-mbm-dev.github.io/kimmdy/</a></p>
 <div id="qr-kmdy" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287","height":"250","width":"250","text":"https://hits-mbm-dev.github.io/kimmdy/"});
+var qrcode = new QRCode("qr-kmdy", {"colorDark":"#1E4287","text":"https://hits-mbm-dev.github.io/kimmdy/","height":"250","width":"250","colorLight":"#ffffff"});
 </script>
     
 <p><img data-src="./img/ala-rad.png" id="ala-rad" class="img-fluid"></p>
@@ -650,7 +645,7 @@ var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287"
 </div>
 </div>
 </div><div class="column fragment" style="width:30%;">
-<div id="0b396990" class="cell" data-execution_count="5">
+<div id="e098f391" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -719,7 +714,9 @@ var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287"
 <li>KIMMDY takes care of topology details</li>
 </ul>
 </div><div class="column fragment" style="width:70%;">
-<p>e.g.&nbsp;Hydrolysis <video data-src="./www/hydrolysis.mp4" class="img-fluid" controls=""><a href="./www/hydrolysis.mp4">Video</a></video></p>
+<!-- -->
+<h3 id="example-peptide-bond-hydrolysis">Example: Peptide bond hydrolysis</h3>
+<p><video data-src="./www/hydrolysis.mp4" class="img-fluid" controls=""><a href="./www/hydrolysis.mp4">Video</a></video></p>
 </div>
 </div>
 </section>
@@ -732,14 +729,17 @@ var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287"
 </section>
 <section id="thank-you-1" class="slide level2">
 <h2>Thank You!</h2>
-<div class="#mbm-group">
+<div id="mbm-group">
 <p><img data-src="./www/mbm-group.jpeg" class="img-fluid" style="width:80.0%"></p>
 </div>
-<div id="qr" class="qrcode"></div>
+<div id="qr">
+<p>Slides:</p>
+<div id="qr-slides" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr", {"colorLight":"#ffffff","colorDark":"#1E4287","height":"124","width":"124","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy"});
+var qrcode = new QRCode("qr-slides", {"colorDark":"#1E4287","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy","height":"256","width":"256","colorLight":"#ffffff"});
 </script>
     
+</div>
 <div id="bar">
 <div class="profile">
 <ul>
@@ -772,6 +772,26 @@ Cornell, Wendy D., Piotr Cieplak, Christopher I. Bayly, Ian R. Gould, Kenneth M.
 <section id="backup-slides" class="title-slide slide level1 center">
 <h1>Backup Slides</h1>
 
+</section>
+<section id="molecules" class="slide level2">
+<h2>Molecules</h2>
+    <iframe id="app-./examples/alanine_hat/just-ala.gro" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
+    <html>
+    <head>
+    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
+    </head>
+    <body>
+    <div id=&quot;app-./examples/alanine_hat/just-ala.gro&quot; class=&quot;molstar-app&quot;></div>
+    <script type=&quot;text/javascript&quot;>
+    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;layoutShowControls&quot;:false,&quot;layoutShowLog&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowExpand&quot;:true,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowSequence&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false}).then(viewer => {
+    viewer.loadStructureFromUrl(&quot;./examples/alanine_hat/just-ala.gro&quot;, format=&quot;gro&quot;);    });
+    </script>
+    </body>
+    </html>
+    ">
+    </iframe>
+    
 </section>
 <section id="topology" class="slide level2">
 <h2>Topology</h2>

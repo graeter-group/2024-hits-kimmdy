@@ -1,7 +1,7 @@
 ---
 title: |
   **KIMMDY**\
-  A Reactive Molecular Dynamics\
+  Reactive Molecular Dynamics\
   using\
   Kinetic Monte Carlo
 # subtitle: Designing Software for Humans
@@ -57,7 +57,7 @@ plt.rcParams['figure.dpi'] = 100
 
 ## Collagen has interesting chemistry under mechanical stress {background-image='./img/collagen.png' background-color=black}
 
-## Simulating (large) Molecular Systems
+## How do we simulating (large) molecular systems?
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -66,73 +66,105 @@ plt.rcParams['figure.dpi'] = 100
 :::{.column width="50%"}
 ### Bonds do not exist.
 :::{.r-stack .center}
-![](./img/molecule-cpk.png)
-
-![](./img/molecule-vdw.png){.fragment}
+![](./img/molecule-vdw.png)
 
 ![](./img/molecule-density.png){.fragment}
+
+![](./img/molecule-cpk.png){.fragment}
 :::
 
 ### But let's pretend they do. {.fragment}
 :::
 :::
 
-## Molecular Dynamics / Molecular Mechanics
+## Molecular Dynamics / Molecular Mechanics -- Newton to the rescue!
 
-{{< mol-url ./examples/alanine_hat/just-ala.gro >}}
-
-::::box
-:::b
-:::{#morse}
-$$V_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2$$
+:::: {.columns}
+::: {.column width="40%"}
+$$E_{total} = E_{bonded} + E_{nonbonded}$$
+$$E_{bonded}=E_{\text{bond}}+E_{\text{angle}}+E_{\text{dihedral}}$$
+$$E_{nonbonded} = E_{\text{electrostatic}} + E_{\text{van der Waals}}$$
 :::
+::: {.column width="30%"}
+![](./img/molecule-cpk.png){#mol1}
+:::
+::: {.column width="30%"}
+![](./img/molecule-cpk.png){#mol2}
+:::
+::::
+
+### Popular Potential Energy Functions {.fragment}
+
+<hr>
+
+:::: {.columns}
+::: {.column width="30%" .fragment}
+
+:::{#oh}
+![](./img/hyd-oh.png)
+:::
+
 ```{python}
 x = np.linspace(0.1, 10, 100)
 d = 1
-b = 0.9
+b = 1
 y = d * (1 - np.exp(-b * (x - 1)))**2
 
 plt.subplots(figsize=(3,2))
-plt.axis('off')
 plt.plot(x, y, color='black', linewidth=5)
+plt.box(False)
+plt.xticks([0, b], ['0', '$r_0$'])
+plt.ylabel('$E$')
+plt.yticks([])
 plt.show()
 ```
+
+$$E_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2$$
 :::
 
-:::b
-:::{#harmonic}
-$$V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2$$
+::: {.column width="30%" .fragment}
+
+:::{#water}
+![](./img/water.png)
 :::
+
 ```{python}
 x = np.linspace(-2, 2, 100)
 k = 0.1
 y = 0.5 * k * x**2
 
 plt.subplots(figsize=(2,2))
-plt.axis('off')
+plt.box(False)
+plt.xticks([0], ['$r_0$'])
+plt.yticks([])
 plt.plot(x, y, color='black', linewidth=5)
 plt.show()
 ```
+
+$$E_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2$$
+
 :::
 
-:::b
-:::{#dihedral}
-$$V_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \delta))$$
-:::
+::: {.column width="30%" .fragment}
 ```{python}
 x = np.linspace(0, 2*pi, 100)
 y = 1 + np.cos(2 * x - pi)
 
-plt.subplots(figsize=(4,2))
-plt.axis('off')
+plt.subplots(figsize=(3,2))
+plt.box(False)
+plt.xticks([pi], [r'$\phi_0$'])
+plt.yticks([])
 plt.plot(x, y, color='black', linewidth=5)
 plt.show()
 ```
+
+$$E_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \phi_0))$$
+
 :::
 ::::
 
 :::{#meme-harmonic .fragment}
-![](img/meme-harmonic.png)
+![](img/meme-harmonic.png){width="85%"}
 :::
 
 ## Force Fields list the parameters for these potentials
@@ -161,6 +193,10 @@ C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01
 [ angletypes ]
 ...
 ```
+
+:::{#harmonic}
+$$V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2$$
+:::
 :::
 ::: {.column width="50%"}
 ![](./img/molecule-cpk.png)
@@ -174,7 +210,6 @@ C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01
 _Project with Kai Riedmiller and Eric Hartmann_
 
 <https://hits-mbm-dev.github.io/kimmdy/>
-
 
 {{< qrcode https://hits-mbm-dev.github.io/kimmdy/ qr-kmdy width=250 height=250 colorDark='#1E4287'  >}}
 
@@ -318,7 +353,7 @@ sequence:
 - KIMMDY takes care of topology details
 :::
 :::{.column width="70%" .fragment}
-e.g. Hydrolysis
+### Example: Peptide bond hydrolysis
 ![](./www/hydrolysis.mp4)
 :::
 ::::
@@ -332,11 +367,14 @@ e.g. Hydrolysis
 
 ## Thank You!
 
-:::#mbm-group
+:::{#mbm-group}
 ![](./www/mbm-group.jpeg){width="80%"}
 :::
 
-{{< qrcode https://github.com/hits-mbm-dev/2024-hits-kimmdy qr width=124 height=124 colorDark='#1E4287' >}}
+:::{#qr}
+Slides:
+{{< qrcode https://github.com/hits-mbm-dev/2024-hits-kimmdy qr-slides width=256 height=256 colorDark='#1E4287' >}}
+:::
 
 ::::{#bar}
 :::profile
@@ -356,6 +394,10 @@ This work was supported by the Klaus Tschira Foundation and has received funding
 :::
 
 # Backup Slides
+
+## Molecules
+
+{{< mol-url ./examples/alanine_hat/just-ala.gro >}}
 
 ## Topology
 

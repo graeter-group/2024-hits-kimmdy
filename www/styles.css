@@ -65,13 +65,6 @@
   margin-bottom: 1lh;
 }
 
-
-.box {
-  display: flex;
-  align-content: first-baseline;
-  justify-content: space-between;
-}
-
 div .molstar-app {
   height: 500px;
   position: relative;
@@ -81,10 +74,24 @@ div .molstar-app {
   max-width: 100%;
 }
 
+#oh {
+  position: absolute;
+  bottom: 40%;
+  left: 5%;
+  width: 10%;
+}
+
+#water {
+  position: absolute;
+  bottom: 25%;
+  left: 40%;
+  width: 25%;
+}
+
 #meme-harmonic {
   position: absolute;
-  top: 5%;
-  left: 0%;
+  top: 3%;
+  right: 0;
   z-index: 10;
 }
 
@@ -92,14 +99,6 @@ div .molstar-app {
   position: absolute;
   top: 40%;
   left: 50%;
-}
-
-div.b>div>div>div>figure>p>img {
-  margin-bottom: 0;
-}
-
-.nb {
-  border-style: none;
 }
 
 .profile li {
@@ -113,10 +112,11 @@ div.b>div>div>div>figure>p>img {
 
 #bar {
   position: absolute;
-  bottom: 0;
+  bottom: 5%;
   background-color: #1E4287;
-  width: 90%;
+  width: 80%;
 }
+
 
 #bar .profile {
   display: flex;
@@ -141,6 +141,7 @@ div.b>div>div>div>figure>p>img {
   position: absolute;
   top: 0%;
   right: 0%;
+  width: 256px;
 }
 
 #qr-kmdy {

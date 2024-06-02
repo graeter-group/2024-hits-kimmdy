@@ -135,7 +135,39 @@ plt.show()
 ![](img/meme-harmonic.png)
 :::
 
-# But what about Chemistry?
+## Force Fields list the parameters for these potentials
+
+e.g. AMBER99SB*-ILDNP [@cornellSecondGenerationForce1995; @alievMotionalTimescalePredictions2014]
+
+::: {.columns}
+::: {.column width="40%"}
+```{.itp filename="forcefield.itp"}
+#include "ffnonbonded.itp"
+#include "ffbonded.itp"
+```
+
+```{.itp filename="ffnonbonded.itp"}
+[ atomtypes ]
+; name      at.num  mass     charge ptype  sigma      epsilon
+Br          35      79.90    0.0000  A   0.00000e+00  0.00000e+00
+C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01
+```
+
+```{.itp filename="ffbonded.itp"}
+[ bondtypes ]
+; i    j  func       b0          kb
+  C  C          1     0.1525   259408.0
+  C  OS         1     0.1323   376560.0
+[ angletypes ]
+...
+```
+:::
+::: {.column width="50%"}
+![](./img/molecule-cpk.png)
+:::
+:::
+
+### But what about Chemistry? {.fragment .cent}
 
 ## Welcome to KIMMDY!
 

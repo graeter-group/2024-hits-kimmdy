@@ -54,14 +54,17 @@
 }
 
 
-
 .black>p {
   color: black;
 }
 
-/*.reveal div.sourceCode {*/
-/*  width: 100%;*/
-/*}*/
+.reveal div.sourceCode,
+.reveal .columns div.sourceCode,
+.reveal div.code-with-filename {
+  border: 2px solid grey;
+  margin-bottom: 1lh;
+}
+
 
 .box {
   display: flex;

@@ -103,6 +103,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -467,7 +468,7 @@ Jannik Buhr, MBM
     <body>
     <div id=&quot;app-./examples/alanine_hat/just-ala.gro&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;viewportShowAnimation&quot;:true,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowRemoteState&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowLog&quot;:false,&quot;layoutShowSequence&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false}).then(viewer => {
+    molstar.Viewer.create(&quot;app-./examples/alanine_hat/just-ala.gro&quot;, {&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLog&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLeftPanel&quot;:true}).then(viewer => {
     viewer.loadStructureFromUrl(&quot;./examples/alanine_hat/just-ala.gro&quot;, format=&quot;gro&quot;);    });
     </script>
     </body>
@@ -480,7 +481,7 @@ Jannik Buhr, MBM
 <div id="morse">
 <p><span class="math display">\[V_{morse}(r) = D \left(1 - e^{-\beta(r - r_0)}\right)^2\]</span></p>
 </div>
-<div id="f8d42f4c" class="cell" data-execution_count="2">
+<div id="b0a08a58" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -494,7 +495,7 @@ Jannik Buhr, MBM
 <div id="harmonic">
 <p><span class="math display">\[V_{harmonic}(r) = \frac{1}{2} k (r - r_0)^2\]</span></p>
 </div>
-<div id="b6548a93" class="cell" data-execution_count="3">
+<div id="6947ea2b" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -508,7 +509,7 @@ Jannik Buhr, MBM
 <div id="dihedral">
 <p><span class="math display">\[V_{cosine}(\phi) = k_\phi (1 + \cos(n \phi - \delta))\]</span></p>
 </div>
-<div id="3653c888" class="cell" data-execution_count="4">
+<div id="6b5171d0" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -523,10 +524,43 @@ Jannik Buhr, MBM
 <p><img data-src="img/meme-harmonic.png" class="img-fluid"></p>
 </div>
 </section>
-<section>
-<section id="but-what-about-chemistry" class="title-slide slide level1 center">
-<h1>But what about Chemistry?</h1>
-
+<section id="force-fields-list-the-parameters-for-these-potentials" class="slide level2">
+<h2>Force Fields list the parameters for these potentials</h2>
+<p>e.g.&nbsp;AMBER99SB*-ILDNP <span class="citation" data-cites="cornellSecondGenerationForce1995 alievMotionalTimescalePredictions2014">(<a href="#/references" role="doc-biblioref" onclick="">Cornell et al. 1995</a>; <a href="#/references" role="doc-biblioref" onclick="">Aliev et al. 2014</a>)</span></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>forcefield.itp</strong></pre>
+</div>
+<pre class="itp" data-filename="forcefield.itp"><code>#include "ffnonbonded.itp"
+#include "ffbonded.itp"</code></pre>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ffnonbonded.itp</strong></pre>
+</div>
+<pre class="itp" data-filename="ffnonbonded.itp"><code>[ atomtypes ]
+; name      at.num  mass     charge ptype  sigma      epsilon
+Br          35      79.90    0.0000  A   0.00000e+00  0.00000e+00
+C            6      12.01    0.0000  A   3.39967e-01  3.59824e-01</code></pre>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ffbonded.itp</strong></pre>
+</div>
+<pre class="itp" data-filename="ffbonded.itp"><code>[ bondtypes ]
+; i    j  func       b0          kb
+  C  C          1     0.1525   259408.0
+  C  OS         1     0.1323   376560.0
+[ angletypes ]
+...</code></pre>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="./img/molecule-cpk.png" class="img-fluid"></p>
+</div>
+</div>
+<h3 class="fragment cent" id="but-what-about-chemistry">But what about Chemistry?</h3>
 </section>
 <section id="welcome-to-kimmdy" class="slide level2">
 <h2>Welcome to KIMMDY!</h2>
@@ -534,13 +568,13 @@ Jannik Buhr, MBM
 <p><a href="https://hits-mbm-dev.github.io/kimmdy/" class="uri">https://hits-mbm-dev.github.io/kimmdy/</a></p>
 <div id="qr-kmdy" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr-kmdy", {"width":"250","text":"https://hits-mbm-dev.github.io/kimmdy/","colorDark":"#1E4287","height":"250","colorLight":"#ffffff"});
+var qrcode = new QRCode("qr-kmdy", {"colorLight":"#ffffff","colorDark":"#1E4287","width":"250","height":"250","text":"https://hits-mbm-dev.github.io/kimmdy/"});
 </script>
     
 <div class="columns">
 <div class="column" style="width:20%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kimmdy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">edit</span> kimmdy.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kimmdy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">edit</span> kimmdy.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <div id="dice" class="fragment">
 <p><img data-src="img/dice.png" class="img-fluid" style="width:30.0%"></p>
@@ -610,7 +644,7 @@ var qrcode = new QRCode("qr-kmdy", {"width":"250","text":"https://hits-mbm-dev.g
 </div>
 </div>
 </div><div class="column fragment" style="width:30%;">
-<div id="cb8c3afd" class="cell" data-execution_count="5">
+<div id="d7e89720" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -622,16 +656,32 @@ var qrcode = new QRCode("qr-kmdy", {"width":"250","text":"https://hits-mbm-dev.g
 </div>
 </div>
 </section>
+<section id="welcome-to-kimmdy-1" class="slide level2">
+<h2>Welcome to KIMMDY!</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<h3 id="builtin-reactions">Builtin Reactions</h3>
+<ul>
+<li><strong>Homolysis</strong></li>
+<li><strong>Hydrogen Atom Transfer</strong> (HAT)</li>
+<li><strong>Hydrolysis</strong></li>
+</ul>
+<h3 id="analysis-tools">Analysis Tools</h3>
+</div><div class="column" style="width:70%;">
+
+</div>
+</div>
+</section>
 <section id="define-your-own-workflow" class="slide level2">
 <h2>Define your own workflow</h2>
 <div class="columns">
 <div class="column large" style="width:30%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> equilibrium</span></span>
-<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">mult</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
-<span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tasks</span><span class="kw">:</span></span>
-<span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> reactions</span></span>
-<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> equilibrium</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> equilibrium</span></span>
+<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">mult</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
+<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> reactions</span></span>
+<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> equilibrium</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:70%;">
 <p><img data-src="img/yml-warning.png" id="yml-warning" class="fragment img-fluid"></p>
 </div>
@@ -667,7 +717,18 @@ var qrcode = new QRCode("qr-kmdy", {"width":"250","text":"https://hits-mbm-dev.g
 <li>Take <strong>state</strong> of the system</li>
 <li>Return <strong>rates</strong> and <strong>recipes</strong></li>
 </ul>
-</section></section>
+<pre><code>(.venv) $ kimmdy --show-plugins
+
+Available reaction plugins:
+dummyreaction
+hat_naive
+homolysis
+hydrolysis_naive
+hat_reaction
+
+Available parameterization plugins:
+grappa</code></pre>
+</section>
 <section>
 <section id="thank-you" class="title-slide slide level1 center">
 <h1>Thank You!</h1>
@@ -680,7 +741,7 @@ var qrcode = new QRCode("qr-kmdy", {"width":"250","text":"https://hits-mbm-dev.g
 
 <img data-src="./www/mbm-group.jpeg" id="mbm-group2" class="img-fluid r-stretch"><div id="qr" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr", {"width":"124","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy","colorDark":"#1E4287","height":"124","colorLight":"#ffffff"});
+var qrcode = new QRCode("qr", {"colorLight":"#ffffff","colorDark":"#1E4287","width":"124","height":"124","text":"https://github.com/hits-mbm-dev/2024-hits-kimmdy"});
 </script>
     
 <div id="bar">
@@ -699,8 +760,13 @@ var qrcode = new QRCode("qr", {"width":"124","text":"https://github.com/hits-mbm
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-alievMotionalTimescalePredictions2014" class="csl-entry" role="listitem">
+Aliev, Abil E, Martin Kulke, Harmeet S Khaneja, Vijay Chudasama, Tom D Sheppard, and Rachel M Lanigan. 2014. <span>“Motional Timescale Predictions by Molecular Dynamics Simulations: Case Study Using Proline and Hydroxyproline Sidechain Dynamics.”</span> <a href="https://doi.org/10.1002/prot.24350">https://doi.org/10.1002/prot.24350</a>.
+</div>
+<div id="ref-cornellSecondGenerationForce1995" class="csl-entry" role="listitem">
+Cornell, Wendy D., Piotr Cieplak, Christopher I. Bayly, Ian R. Gould, Kenneth M. Merz, David M. Ferguson, David C. Spellmeyer, Thomas Fox, James W. Caldwell, and Peter A. Kollman. 1995. <span>“A Second Generation Force Field for the Simulation of Proteins, Nucleic Acids, and Organic Molecules.”</span> <a href="https://doi.org/10.1021/ja00124a002">https://doi.org/10.1021/ja00124a002</a>.
+</div>
 </div>
 </section></section>
 <section>
